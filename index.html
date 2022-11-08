@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cechella's Site</title>
-    <link rel="stylesheet" href="style.css" />
     <script src="bd.js"></script>
+    <script src="conversor.js"></script>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
     <header>
@@ -45,6 +46,12 @@
             <input type="button" value="Pesquisar!" onclick="pesquisaPorNome()"
             />
             <input type="text" id="resultado-pesquisa" readonly placeholder="Resultado..." />
+        </section>
+
+        <section>
+            <h3>Exibe Banco de dados</h3>
+            <input type="button" value="Exibir!" onclick="exibeBD()">
+            <div id="lista-bd"></div>
         </section>
     </main>
 </body>
