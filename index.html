@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cechella's Site</title>
     <script src="bd.js"></script>
-    <script src="conversor.js"></script>
+    <script src="index.js"></script>
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -32,19 +32,16 @@
 
         <section>
             <h3>Registro Banco de Dados</h3>
-            <input type="text" id="nome-usuario"
-            placeholder="Nome" />
-            <input type="number" id="idade-usuario"
-            placeholder="Idade" />
+            <input type="text" id="nome-usuario" placeholder="Nome" />
+            <input type="number" id="idade-usuario" placeholder="Idade" />
+            <input type="text" id="email-usuario" placeholder="exemplo@gmail.com" />
             <input type="button" value="Salvar!" onclick="salvarInfo()" />
         </section>
 
         <section>
             <h3>Pesquisa Banco de Dados</h3>
-            <input type="text" id="pesquisa-nome-usuario" placeholder="Nome"
-            />
-            <input type="button" value="Pesquisar!" onclick="pesquisaPorNome()"
-            />
+            <input type="text" id="pesquisa-nome-usuario" placeholder="Nome" />
+            <input type="button" value="Pesquisar!" onclick="pesquisaPorNome()" />
             <input type="text" id="resultado-pesquisa" readonly placeholder="Resultado..." />
         </section>
 
@@ -52,6 +49,14 @@
             <h3>Exibe Banco de dados</h3>
             <input type="button" value="Exibir!" onclick="exibeBD()">
             <div id="lista-bd"></div>
+        </section>
+
+        <section>
+            <h3> Edita Banco de Dados</h3>
+            <input type="text" id="nome-alteracao" placeholder="nome"/>
+            <input type="number" id="idade-alteracao" placeholder="idade"/>
+            <input type="button" value="Editar" onclick="alteraInfo()"/>
+            <input type="button" value="Excluir" onclick="excluirInfo()"/>
         </section>
     </main>
 </body>
