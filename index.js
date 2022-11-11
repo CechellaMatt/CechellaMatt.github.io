@@ -1,6 +1,5 @@
 let nomeAtualParaEditar;
 let idadeAtualParaEditar;
-let emailAtualParaEditar;
 
 function converteParaFahrenheit() {
     const temperaturaCelsius = parseFloat(document.getElementById("temperatura-celsius").value);
@@ -16,7 +15,4 @@ function mostrarCartaoAltera (nome, idade){
     
     document.getElementById("idade-alteracao").value = idade;
     idadeAtualParaEditar = parseInt(idade);
-
-    document.getElementById("email-usuario").value = email;
-    emailAtualParaEditar = email;
 }

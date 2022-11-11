@@ -1,25 +1,28 @@
 var bd = openDatabase("meuBD", "1.0", "Meu Banco de Dados", 4080);
 bd.transaction(function (criar) {
-    criar.executeSql("CREATE TABLE formulario (nome TEXT, idade INTEGER, email TEXT)");
+    criar.executeSql("CREATE TABLE formulario (nome TEXT, idade INTEGER, altura FLOAT(2, 4), dataNasc DATE, contatos JSON)");
 });
 
 function salvarInfo() {
     const nomeUsuario = document.getElementById("nome-usuario").value.toUpperCase();
     const idadeUsuario = parseInt(document.getElementById("idade-usuario").value);
-    const emailUsuario = document.getElementById("email-usuario").value;
+    const alturaUsuario = parseFloat(document.getElementById("altura-usuario").value);
+    const dataNascUsuario = document.getElementById("data-nasc-usuario").value;
+    const emailUsuario = document.getElementById("email-usuario").value.toLowerCase();
+    const telefoneUsuario = document.getElementById("telefone-usuario").value;
+    const contatos = {"e-mail": emailUsuario, "tel": telefoneUsuario}
 
-    if (nomeUsuario === "" || isNaN(idadeUsuario) || emailUsuario === "") {
+    if (nomeUsuario === "" || isNaN(idadeUsuario)) {
         alert("Faltam informações!");
         return false;
     }
 
     bd.transaction(function (inserir){
-        inserir.executeSql("INSERT INTO formulario (nome, idade, email) VALUES (?,?,?)", [nomeUsuario, idadeUsuario, emailUsuario]);
+        inserir.executeSql("INSERT INTO formulario (nome, idade, altura, dataNasc, contatos) VALUES (?, ?, ?, ?, ?)", [nomeUsuario, idadeUsuario, alturaUsuario, dataNascUsuario, JSON.stringify(contatos)]);
     });
 
     document.getElementById("nome-usuario").value = "";
     document.getElementById("idade-usuario").value = "";
-    document.getElementById("email-usuario").value = "";
 }
 
 function pesquisaPorNome(){
@@ -57,10 +60,9 @@ function exibeBD(){
 function alteraInfo(){
     const novoNome = document.getElementById("nome-alteracao").value;
     const novaIdade = parseInt(document.getElementById("idade-alteracao").value);
-    const novoEmail = document.getElementById("email-alteracao").value;
 
     bd.transaction(function(altera){
-        altera.executeSql(`UPDATE formulario SET nome="${novoNome}", idade=${novaIdade}, email="${novoEmail}" WHERE nome="${nomeAtualParaEditar}" AND idade=${idadeAtualParaEditar} AND email="${emailAtualParaEditar}"`);
+        altera.executeSql(`UPDATE formulario SET nome="${novoNome}", idade=${novaIdade} WHERE nome="${nomeAtualParaEditar}" AND idade=${idadeAtualParaEditar}`);
     });
 
     exibeBD();
@@ -71,7 +73,7 @@ function excluirInfo(){
     const novaIdade = parseInt(document.getElementById("nome-alteracao").value);
 
     bd.transaction(function(deleta){
-        deleta.executeSql(`DELETE FROM formulario WHERE nome="${nomeAtualParaEditar}" AND idade=${idadeAtualParaEditar} AND email="${emailAtualParaEditar}"`);
+        deleta.executeSql(`DELETE FROM formulario WHERE nome="${nomeAtualParaEditar}" AND idade=${idadeAtualParaEditar}`);
     });  
  
     exibeBD();
